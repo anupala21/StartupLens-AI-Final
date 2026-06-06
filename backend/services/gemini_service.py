@@ -18,22 +18,49 @@ def analyze_startup_idea(idea):
 
     {idea}
 
-    Return ONLY valid JSON in this format:
+    Return:
+    1. Innovation Score (1-10)
+    2. Market Potential (1-10)
+    3. Competition Level
+    4. Success Probability (%)
+    5. Key Recommendations
+
+    Format nicely.
+    """
+
+    response = model.generate_content(prompt)
+
+    text = response.text
+
+    text = text.replace("```json", "")
+    text = text.replace("```", "")
+
+    return text.strip()
+
+
+# -----------------------------
+# NEW FUNCTION
+# -----------------------------
+
+def find_competitors(idea):
+
+    prompt = f"""
+    Analyze this startup idea:
+
+    {idea}
+
+    Return ONLY valid JSON:
 
     {{
-        "innovation_score": 8,
-        "market_potential": 9,
-        "competition_level": "Medium",
-        "success_probability": 75,
-        "recommendations": [
-            "Recommendation 1",
-            "Recommendation 2",
-            "Recommendation 3"
-        ]
+        "competitors": [
+            "Competitor 1",
+            "Competitor 2",
+            "Competitor 3"
+        ],
+        "market_gap": "Gap in market",
+        "opportunity_level": "High"
     }}
 
-    Do not include markdown.
-    Do not include explanations.
     Return JSON only.
     """
 
