@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-app = FastAPI(title="StartupLens AI")
+from backend.agents.idea_agent import (
+    IdeaAgent
+)
+
+app = FastAPI()
 
 
 class IdeaRequest(BaseModel):
@@ -10,13 +14,25 @@ class IdeaRequest(BaseModel):
 
 @app.get("/")
 def home():
-    return {"message": "StartupLens AI Backend Running"}
+    return {
+        "message": "StartupLens AI Running"
+    }
 
+
+import json
 
 @app.post("/validate")
-def validate_idea(request: IdeaRequest):
+def validate(request: IdeaRequest):
 
-    return {
-        "idea": request.idea,
-        "status": "received"
-    }
+    result = IdeaAgent.validate(request.idea)
+
+    try:
+        return json.loads(result)
+
+    except Exception as e:
+
+        print("JSON ERROR:", e)
+
+        return {
+            "raw_response": result
+        }

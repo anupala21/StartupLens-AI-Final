@@ -1,26 +1,53 @@
 import streamlit as st
 import requests
 
-st.set_page_config(
-    page_title="StartupLens AI",
-    layout="wide"
-)
-
 st.title("🚀 StartupLens AI")
 
 idea = st.text_area(
-    "Enter Your Startup Idea"
+    "Enter Startup Idea"
 )
 
 if st.button("Validate Idea"):
 
-    response = requests.post(
-        "http://127.0.0.1:8000/validate",
-        json={"idea": idea}
-    )
+    with st.spinner("Analyzing startup idea..."):
 
-    result = response.json()
+        response = requests.post(
+            "http://127.0.0.1:8000/validate",
+            json={"idea": idea}
+        )
 
-    st.success("Idea Submitted")
+        result = response.json()
+        #st.write(result)
 
-    st.write(result)
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.metric(
+                "Innovation Score",
+                f"{result['innovation_score']}/10"
+            )
+
+            st.metric(
+                "Market Potential",
+                f"{result['market_potential']}/10"
+            )
+
+        with col2:
+            st.metric(
+                "Competition",
+                result['competition_level']
+            )
+
+            st.metric(
+                "Success Probability",
+                f"{result['success_probability']}%"
+            )
+
+        st.progress(
+            result["success_probability"] / 100
+        )
+
+        st.subheader("Recommendations")
+
+        for rec in result["recommendations"]:
+            st.write("✅", rec)
