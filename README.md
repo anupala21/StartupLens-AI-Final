@@ -183,19 +183,19 @@ streamlit run frontend/app.py
 
 ### Startup Validation
 
-_Add Screenshot Here_
+![alt text](<Screenshot 2026-06-06 141626.png>)
 
 ### Competitor Analysis
 
-_Add Screenshot Here_
+![alt text](<Screenshot 2026-06-06 141652.png>)
 
 ### Market Research
 
-_Add Screenshot Here_
+![alt text](<Screenshot 2026-06-06 141719.png>)
 
 ### Startup Blueprint
 
-_Add Screenshot Here_
+![alt text](<Screenshot 2026-06-06 141719-1.png>)
 
 ---
 
