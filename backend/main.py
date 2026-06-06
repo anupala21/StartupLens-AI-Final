@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-
+from backend.agents.idea_agent import IdeaAgent
+from backend.services.gemini_service import GeminiService
 app = FastAPI(title="StartupLens AI")
 
 
