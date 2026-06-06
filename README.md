@@ -183,7 +183,7 @@ streamlit run frontend/app.py
 
 ### Startup Validation
 
-![Startup Validation](screenshots/validation.png)
+![Startup validation](screenshots/validation.png)
 
 ### Competitor Analysis
 
